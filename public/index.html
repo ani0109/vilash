@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tgs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="./static/jquery.js"></script>
+    <!-- <script type="text/javascript" src="./static/player.js"></script> -->
+    <script src="./static/mqttPaho.js"></script>
+</head>
+
+<body>
+    <div class="full-screen">
+        <div class="vfd-param">
+            <div class="square-box">
+                <div class="square-child">
+                    <h2 class="content-heads">DRUM</h2>
+                </div>
+                <div class="square-child">
+                    <h2 class="content-heads">SOIL MOISTURE: <span class="data-color moisture">---</span></h2>
+                </div>
+                <div class="square-child">
+                    <h2 class="content-heads">PRESSURE: <span class="data-color pressure">20 bar</span></h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head">Total Count: <span class="data-color nC">0</span></h2>
+                </div>
+            </div>
+            <div class="square-box">
+                <div class="square-child">
+                    <h2 class="content-heads">RPM </h2>
+                </div>
+                <div class="square-child">
+                    <h2 class="content-heads">DISTANCE: <span class="data-color distance">0 m</span></h2>
+                </div>
+                <div class="square-child">
+                    <h2 class="content-heads">SPEED: <span class="data-color speed">---</span></h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head">Status: <span class="data-color status">IDLE</span></h2>
+                </div>
+            </div>
+            <div class="square-box">
+                <div class="square-child">
+                    <h2 class="content-heads">SAND MOISTURE</h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head"><span class="data-color sandMoisture">---</span></h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="small-text">Worker Assigned: <span class="data-color">Raman</span></h2>
+                </div>
+            </div>
+            <div class="square-box">
+                <div class="square-child">
+                    <h2 class="content-heads">VFD 1</h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head"><span class="data-color vfd1">3599 Hz</span></h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head">Downtime: <span class="data-color downtime">18</span></h2>
+                </div>
+            </div>
+            <div class="square-box">
+                <div class="square-child">
+                    <h2 class="content-heads">VFD 2</h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head"><span class="data-color vfd2">3500 Hz</span></h2>
+                </div>
+                <div class="square-childs">
+                    <h2 class="vfd-head">Bad Count: <span class="data-color nB">20</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="camera"></div>
+
+        <div class="increment">
+            <div class="box-inc">
+                <form onsubmit="vfd1(event)">
+                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                    <input type="number" id="number1" class="rfreqvfd1" min="0" placeholder="VFD 1" />
+                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                </form>
+            </div>
+            <div class="box-inc">
+                <form onsubmit="vfd2()">
+                    <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                    <input type="number" id="number2" min="0" placeholder="VFD 2" />
+                    <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.onkeydown = function (e) {
+                if (e.keyCode == '37') {
+                    $('input#number2').css('background', 'none');
+                    $('input#number1').css('background', '#fff');
+                    $('input#number1').css('border', '3px solid green');
+                    $('input#number2').css('border', 'none');
+                    $('input#number1').focus();
+                    console.log('left');
+                } else if (e.keyCode == '39') {
+                    $('input#number2').css('background', '#fff');
+                    $('input#number1').css('background', 'none');
+                    $('input#number2').css('border', '3px solid green');
+                    $('input#number1').css('border', 'none');
+                    $('input#number2').focus();
+                    console.log('right');
+
+                }
+            }
+        })
+    </script>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>
